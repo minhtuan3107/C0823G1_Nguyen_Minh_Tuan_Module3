@@ -16,8 +16,8 @@ SELECT
     *
 FROM
     class;
-insert into teacher(teacher_name,teacher_age,teaher_country) value("Tuan",18,"VietNam");
-insert into teacher(teacher_name,teacher_age,teaher_country) value("Hehe",19,"VietNam");
+insert into teacher(teacher_name,teacher_age,teacher_country) value("Tuan",18,"VietNam");
+insert into teacher(teacher_name,teacher_age,teacher_country) value("Hehe",19,"VietNam");
 SELECT 
     *
 FROM
