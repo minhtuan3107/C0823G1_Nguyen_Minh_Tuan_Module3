@@ -2,11 +2,11 @@ CREATE DATABASE `bai_tap_1`;
 use bai_tap_1;
 
 CREATE TABLE class (
-    class_id INT KEY AUTO_INCREMENT,
+    id INT KEY AUTO_INCREMENT,
     class_name VARCHAR(200)
 );
 CREATE TABLE teacher (
-    teacher_id INT KEY AUTO_INCREMENT,
+    id INT KEY AUTO_INCREMENT,
     teacher_name VARCHAR(200),
     teacher_age INT,
     teacher_country VARCHAR(200)
@@ -16,7 +16,8 @@ SELECT
     *
 FROM
     class;
-insert into teacher(teacher_name,teacher_age,teaher_country) value("Tuan",18,"VietNam"),("Hehe",19,"Viet Nam");
+insert into teacher(teacher_name,teacher_age,teaher_country) value("Tuan",18,"VietNam");
+insert into teacher(teacher_name,teacher_age,teaher_country) value("Hehe",19,"VietNam");
 SELECT 
     *
 FROM
