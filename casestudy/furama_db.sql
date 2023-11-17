@@ -209,6 +209,3 @@ insert into hop_dong_chi_tiet(so_luong,ma_hop_dong,ma_dich_vu_di_kem) values
 (2,1,2),
 (2,12,2);
 
-select * from nhan_vien
-where (left(ho_ten, 1) = 'H' or left(ho_ten, 1) = 'T' or left(ho_ten, 1) = 'K')
-and length(ho_ten) <= 15;
