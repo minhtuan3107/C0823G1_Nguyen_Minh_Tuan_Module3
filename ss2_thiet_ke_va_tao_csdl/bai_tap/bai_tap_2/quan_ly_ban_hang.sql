@@ -23,13 +23,13 @@ create table `order` (
     order_total_price int not null check (order_total_price >= 1)
 );
 
-create table order_dentail (
-	order_dentail_id int primary key auto_increment,
+create table order_detail (
+	order_detail_id int primary key auto_increment,
     order_id int,
     product_id int,
     foreign key (order_id)
         references `order` (order_id),
     foreign key (product_id)
         references product (product_id),
-    order_dentail_quality varchar(20)
+    order_detail_quality varchar(20)
 );
