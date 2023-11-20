@@ -96,7 +96,7 @@ group by thang;
 -- ngay_ket_thuc, tien_dat_coc, so_luong_dich_vu_di_kem (được tính dựa trên việc sum so_luong ở dich_vu_di_kem).
 
 select hd.ma_hop_dong , ngay_lam_hop_dong, ngay_ket_thuc,tien_dat_coc,
-count(distinct dvdk.ma_dich_vu_di_kem) as số_lượng_dịch_vụ_đi_kèm
+count(dvdk.ma_dich_vu_di_kem) as số_lượng_dịch_vụ_đi_kèm
 from hop_dong hd
 left join hop_dong_chi_tiet hdct on hd.ma_hop_dong = hdct.ma_hop_dong
 left join dich_vu_di_kem dvdk on hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
@@ -116,12 +116,28 @@ where (loai_khach.ten_loai_khach = "Diamond") and (khach_hang.dia_chi like "%Vin
 
 -- 12.	Hiển thị thông tin ma_hop_dong, ho_ten (nhân viên), ho_ten (khách hàng), so_dien_thoai (khách hàng), ten_dich_vu, so_luong_dich_vu_di_kem (được tính dựa trên việc sum so_luong ở dich_vu_di_kem)
 --  tien_dat_coc của tất cả các dịch vụ đã từng được khách hàng đặt vào 3 tháng cuối năm 2020 nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2021.
-set sql_mode = 0;
 
-select hop_dong_chi_tiet.ma_hop_dong,dich_vu_di_kem.ten_dich_vu_di_kem, hop_dong_chi_tiet.so_luong
-from hop_dong_chi_tiet
-where hop_dong_chi_tiet.so_luong in (
-select max(hop_dong_chi_tiet.so_luong)
+-- 13.	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng. 
+select dich_vu_di_kem.ma_dich_vu_di_kem, dich_vu_di_kem.ten_dich_vu_di_kem,sum(hop_dong_chi_tiet.so_luong)
 from dich_vu_di_kem
- join dich_vu_di_kem on hop_dong_chi_tiet.ma_dich_vu_di_kem = dich_vu_di_kem.ma_dich_vu_di_kem
-);
+left join hop_dong_chi_tiet on hop_dong_chi_tiet.ma_dich_vu_di_kem = dich_vu_di_kem.ma_dich_vu_di_kem
+group by dich_vu_di_kem.ma_dich_vu_di_kem
+having sum(hop_dong_chi_tiet.so_luong) = (select sum(hop_dong_chi_tiet.so_luong)
+from hop_dong_chi_tiet
+group by hop_dong_chi_tiet.ma_dich_vu_di_kem
+order by sum(hop_dong_chi_tiet.so_luong) desc
+limit 1);
+
+-- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm ma_hop_dong, 
+-- ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
+-- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm ma_nhan_vien, ho_ten, ten_trinh_do, ten_bo_phan, 
+-- so_dien_thoai, dia_chi mới chỉ lập được tối đa 3 hợp đồng từ năm 2020 đến 2021.
+select nhan_vien.ma_nhan_vien, nhan_vien.ho_ten, trinh_do.ten_trinh_do, bo_phan.ten_bo_phan, nhan_vien.so_dien_thoai, nhan_vien.dia_chi
+from nhan_vien 
+join trinh_do  on nhan_vien.ma_trinh_do = trinh_do.ma_trinh_do
+join bo_phan  on nhan_vien.ma_bo_phan = bo_phan.ma_bo_phan
+join hop_dong  on nhan_vien.ma_nhan_vien = hop_dong.ma_nhan_vien
+where year(hop_dong.ngay_lam_hop_dong) between 2020 and 2021
+group by nhan_vien.ma_nhan_vien, nhan_vien.ho_ten, trinh_do.ten_trinh_do, bo_phan.ten_bo_phan, nhan_vien.so_dien_thoai, nhan_vien.dia_chi
+having count(hop_dong.ma_hop_dong) <= 3;
+
