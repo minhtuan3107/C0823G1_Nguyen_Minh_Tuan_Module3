@@ -48,15 +48,17 @@ select
     *
 from
     `order`;
-    
+
 -- Hiển thị danh sách các khách hàng đã mua hàng, và danh sách sản phẩm được mua bởi các khách
 
 select c.customer_id, c.customer_name, p.product_name, od.order_detail_quality
 from customer c
 join `order` o on c.customer_id = o.customer_id
 join order_detail od on o.order_id = od.order_id
-join product p on od.product_id = p.product_id;
- 
+join product p on od.product_id = p.product_id
+group by c.customer_id,p.product_id;
+
+-- group by p.product_name;
 -- Hiển thị tên những khách hàng không mua bất kỳ một sản phẩm nào
 
 select customer.customer_name
@@ -69,4 +71,4 @@ select o.order_id, o.order_date,sum(od.order_detail_quality * p.product_price)
 from `order` o
 join order_detail od on o.order_id = od.order_id
 join product p on od.product_id = p.product_id
-group by o.order_id, o.order_date;
+group by o.order_id;

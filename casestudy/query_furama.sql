@@ -105,4 +105,23 @@ group by hd.ma_hop_dong;
 -- 11.	Hiển thị thông tin các dịch vụ đi kèm đã được sử dụng bởi những khách 
 -- hàng có ten_loai_khach là “Diamond” và có dia_chi ở “Vinh” hoặc “Quảng Ngãi”.
 
-select 
+select  dich_vu_di_kem.ma_dich_vu_di_kem, dich_vu_di_kem.ten_dich_vu_di_kem
+from dich_vu_di_kem
+join hop_dong_chi_tiet on dich_vu_di_kem.ma_dich_vu_di_kem = hop_dong_chi_tiet.ma_dich_vu_di_kem
+join hop_dong on hop_dong_chi_tiet.ma_hop_dong = hop_dong.ma_hop_dong
+join khach_hang on hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
+where khach_hang.ma_loai_khach = (select loai_khach.ma_loai_khach 
+from loai_khach
+where (loai_khach.ten_loai_khach = "Diamond") and (khach_hang.dia_chi like "%Vinh" or khach_hang.dia_chi like "% Quảng Ngãi"));
+
+-- 12.	Hiển thị thông tin ma_hop_dong, ho_ten (nhân viên), ho_ten (khách hàng), so_dien_thoai (khách hàng), ten_dich_vu, so_luong_dich_vu_di_kem (được tính dựa trên việc sum so_luong ở dich_vu_di_kem)
+--  tien_dat_coc của tất cả các dịch vụ đã từng được khách hàng đặt vào 3 tháng cuối năm 2020 nhưng chưa từng được khách hàng đặt vào 6 tháng đầu năm 2021.
+set sql_mode = 0;
+
+select hop_dong_chi_tiet.ma_hop_dong,dich_vu_di_kem.ten_dich_vu_di_kem, hop_dong_chi_tiet.so_luong
+from hop_dong_chi_tiet
+where hop_dong_chi_tiet.so_luong in (
+select max(hop_dong_chi_tiet.so_luong)
+from dich_vu_di_kem
+ join dich_vu_di_kem on hop_dong_chi_tiet.ma_dich_vu_di_kem = dich_vu_di_kem.ma_dich_vu_di_kem
+);
