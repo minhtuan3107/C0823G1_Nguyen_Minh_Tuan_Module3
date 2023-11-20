@@ -65,22 +65,22 @@ where year(ngay_lam_hop_dong) = 2021);
   
 -- cach 1
 
-select kh.ho_ten
-from khach_hang kh
-group by kh.ho_ten
+select khach_hang.ho_ten
+from khach_hang 
+group by khach_hang.ho_ten
 having count(*) = 1;
 
 -- cach 2 
 
-select ho_ten, count(*)
+select khach_hang.ho_ten, count(*)
 from khach_hang
-group by ho_ten;
+group by khach_hang.ho_ten;
 
 -- cach 3
 
-select ho_ten
+select khach_hang.ho_ten
 from khach_hang
-group by ho_ten;
+group by khach_hang.ho_ten;
 
 -- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2021 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
 
@@ -101,3 +101,8 @@ from hop_dong hd
 left join hop_dong_chi_tiet hdct on hd.ma_hop_dong = hdct.ma_hop_dong
 left join dich_vu_di_kem dvdk on hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
 group by hd.ma_hop_dong;
+
+-- 11.	Hiển thị thông tin các dịch vụ đi kèm đã được sử dụng bởi những khách 
+-- hàng có ten_loai_khach là “Diamond” và có dia_chi ở “Vinh” hoặc “Quảng Ngãi”.
+
+select 

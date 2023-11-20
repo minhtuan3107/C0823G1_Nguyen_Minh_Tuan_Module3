@@ -95,3 +95,15 @@ select s.student_name, s.student_birthday, s.student_gender, s.student_point, s.
 from student s join class c on c.class_id = s.class_id
 where c.class_name like "%c11%"
 order by student_name;
+
+-- cau 1
+
+           SELECT class_id, class_name, MAX(student_point) AS diemLonNhat
+FROM student
+GROUP BY class_id, class_name;
+
+-- cau 2
+
+SELECT class_id, class_name, MAX(student_point) AS diemLonNhat
+FROM student
+GROUP BY class_id, class_name;
