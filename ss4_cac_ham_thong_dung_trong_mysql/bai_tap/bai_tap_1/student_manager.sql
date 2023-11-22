@@ -50,15 +50,21 @@ insert into mark(subject_id, student_id, mark_point, mark_exam_time) values (1, 
 
 select *
 from subject
-order by subject.subject_credit desc
-limit 1;
+group by subject.subject_id
+having subject.subject_credit = (
+select max(subject.subject_credit)
+from subject);
 
 -- Hiển thị các thông tin môn học có điểm thi lớn nhất.
+select subject.*, mark.mark_point
+from subject
+join mark on mark.subject_id = subject.subject_id
+having mark.mark_point = (
+select max(mark.mark_point)
+from mark
+);
 
-select subject.subject_id, subject.subject_name, max(mark.mark_point)
-from subject 
-join mark on subject.subject_id = mark.subject_id
-group by subject.subject_id, subject.subject_name;
+
 
 -- Hiển thị các thông tin sinh viên và điểm trung bình của mỗi sinh viên, xếp hạng theo thứ tự điểm giảm dần
 
