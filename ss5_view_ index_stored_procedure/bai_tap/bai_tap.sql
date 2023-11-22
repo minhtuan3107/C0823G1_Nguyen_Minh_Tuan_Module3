@@ -1,6 +1,6 @@
-create database demo;
+create database product_manager;
 
-use demo;
+use product_manager;
 
 create table product(
 	product_id int primary key auto_increment,
