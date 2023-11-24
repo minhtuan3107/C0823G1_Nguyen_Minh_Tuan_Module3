@@ -72,17 +72,8 @@ delimiter //
 create procedure edit_product(product_edit_id int,product_edit_code int, product_edit_name varchar(50), product_edit_price double, product_edit_amount int, product_edit_des varchar(50), product_edit_status bit )
 begin 
 set sql_safe_updates = 0;
-update product set product_code = product_edit_code
-where product_edit_id = product_id ;
-update product set product_name = product_edit_name
-where product_edit_id = product_id ;
-update product set product_price = product_edit_price
-where product_edit_id = product_id ;
-update product set pruduct_amount = product_edit_amount
-where product_edit_id = product_id ;
-update product set product_des = product_edit_des
-where product_edit_id = product_id ;
-update product set product_status = product_edit_status
+update product 
+set product_code = product_edit_code, product_name = product_edit_name, product_price = product_edit_price, product_amount = product_edit_amount, product_des = product_edit_des, product_status = product_edit_status
 where product_edit_id = product_id ;
 end //
 delimiter ;

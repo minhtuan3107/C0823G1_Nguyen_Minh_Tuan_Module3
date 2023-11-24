@@ -69,3 +69,14 @@ left join hop_dong hd on nv.ma_nhan_vien = hd.ma_nhan_vien
 where year(hd.ngay_lam_hop_dong) between 2020 and 2021
 group by nv.ma_nhan_vien
 having count(hd.ma_hop_dong) <= 3;
+
+-- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
+
+delete from nhan_vien nv
+where nv.ma_nhan_vien not in (
+select *
+from nhan_vien nv
+join hop_dong hd on nv.ma_nhan_vien = hd.ma_hop_dong
+where year(hd.ngay_lam_hop_dong) between 2019 and 2021
+group by hd.ma_nhan_vien
+);
