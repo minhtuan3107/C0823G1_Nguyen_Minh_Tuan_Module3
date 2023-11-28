@@ -35,17 +35,17 @@ body {
     height: 50px;
 }
 
-.colunm1 {
-    height: 500px;
+.column1 {
+    height: 1000px;
     background: #f1f1f1;
 }
 
-.colunm2 {
-    height: 500px;
+.column2 {
+    height: 1000px;
 }
 
-.colunm3 {
-    height: 500px;
+.column3 {
+    height: 1000px;
     background: #f1f1f1;
 }
 
@@ -58,14 +58,18 @@ body {
 }
 
 .b {
-    float: inline-end;
+    float: right;
     position: relative;
     left: -26px;
     top: 18px;
     color: white;
     text-decoration: none;
 }
-
+.footer{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
 
 /* man hinh cho dien thoai */
 

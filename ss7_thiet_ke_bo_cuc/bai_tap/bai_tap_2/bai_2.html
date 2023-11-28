@@ -3,110 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        .title-word {
-            width: 100%;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        .title-word ul {
-            display: flex;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .title-word ul li {
-            padding: 0 9%;
-        }
-
-        .left ul {
-            justify-content: center;
-            width: 100%;
-        }
-        .right{
-            margin-left: 4%;
-        }
-        .right ul li{
-            width: 100%;
-        }
-        .right ul li p{
-            color: grey;
-            font-size: 19px;
-        }
-        #sidebar{
-            width: 30%;
-            float: left;
-        }
-        #post{
-            width: 69%;
-            float: right;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div style="background-color: #f5f5f5">
-    <img style="width: 10%"
-         src="https://play-lh.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc=w600-h300-pc0xffffff-pd"
-         alt="logo trang web"/>
-</div>
-<div class="title-word" style="background-color: #f5f5f5">
-    <ul>
-        <li>Phim hoạt hình</li>
-        |
-        <li>Phim hoạt hình yêu thích</li>
-        |
-        <li>Nhân vật hoạt hình</li>
-        |
-        <li>Góp ý</li>
-    </ul>
-</div>
-<div id="sidebar">
+<div>
     <div>
-        <ul>
-            <li>
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/EGoE47R1rYM?si=WdqhV2sKV23ynqtj"
+        <div style="background: darkgray"><img style="width: 5%"
+                                               src="https://play-lh.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc=w600-h300-pc0xffffff-pd"
+                                               alt="logo trang web"/></div>
+        <div class="col-12 title-word " style="justify-content: center; align-items: center; display: flex;">
+            <ul>
+                <li>Phim hoạt hình</li>
+                |
+                <li>Phim hoạt hình yêu thích</li>
+                |
+                <li>Nhân vật hoạt hình</li>
+                |
+                <li>Góp ý</li>
+            </ul>
+        </div>
+        <div class="main row" >
+            <div class="col-l-4 col-m-5 col-s-12">
+                <iframe width="90%" height="315" src="https://www.youtube.com/embed/EGoE47R1rYM?si=WdqhV2sKV23ynqtj"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
-            </li>
-            <li>
-                <b>Chào mừng đến với khách sạn Nobi</b> -
+                <br>
+                <b>Chào mừng đến với khách sạn Nobi</b>
                 <span>5,147,528 lượt xem</span>
-            </li>
-            <li style="color: grey"><b>Channel Fun</b></li>
-            <li>
-                <iframe width="100%" height="315" src="https://www.youtube.com/embed/zFEF1v8FHjw?si=FRKCEXQwjJy_9LnY"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-            </li>
-            <li><b>Suneo Khổng Lồ</b> - <span>5,147,528 lượt xem</span></li>
-            <li style="color: grey"><b>Doraemon VietSub</b></li>
-            <li><iframe width="100%" height="315" src="https://www.youtube.com/embed/ZT-YmX1E3so?si=g3klpzNAT2iuvJAv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></li>
-            <li>
-                <b>Còi điều khiển vật</b> - <span>5,147,528 lượt xem</span>
-            </li>
-            <li style="color: grey"><b>Doraemon VietSub</b></li>
-            <li><li><iframe width="100%" height="315" src="https://www.youtube.com/embed/WkrdkZrZw8Q?si=6CHsuzIgFoSZQTSU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></li>
-            <li>
-                <b>Chiếc máy tạo kẹo bông</b> - <span>5,147,528 lượt xem</span>
-            </li>
-            <li style="color: grey"><b>Doraemon VietSub</b></li>
-            <li>
-        </ul>
-    </div>
-</div>
-<div id="post">
-    <div class="right">
-        <ul>
-            <li>
+                <br>
+                <b style="color: chocolate">Doraemon VietSub</b>
+                <div>
+                    <iframe width="90%" height="315"
+                            src="https://www.youtube.com/embed/zFEF1v8FHjw?si=FRKCEXQwjJy_9LnY"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                </div>
+                <b>Suneo Khổng Lồ</b>
+                <span>5,147,528 lượt xem</span>
+                <br>
+                <b style="color: chocolate">Doraemon VietSub</b>
+                <div>
+                    <iframe width="90%" height="315"
+                            src="https://www.youtube.com/embed/ZT-YmX1E3so?si=g3klpzNAT2iuvJAv"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                </div>
+                <b>Kính 3D tạo cảm giác</b> <span>5,147,528 lượt xem</span>
+                <br>
+                <b style="color: chocolate">Doraemon VietSub</b>
+            </div>
+            <div class="col-l-8 col-m-7 col-s-12">
                 <iframe
-                        width="100%"
+                        width="90%"
                         height="600px"
                         src="https://www.youtube.com/embed/U7dpo6uSipE?si=oEKO65mBBqsvBYLr"
                         title="YouTube video player"
@@ -114,13 +65,15 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen
                 ></iframe>
-            </li>
-            <li>
-                <b>Tớ Là Mari -</b
-                ><span style="color: grey"> 5,147,528 lượt xem</span>
-            </li>
-            <li style="color: #848a9f"><p>Tác Giả</p></li>
-            <li style="color: #848a9f">Bộ phim kể về câu chuyện Thạch Sanh chém Trăn Tinh cứu dân, bắn Đại Bàng cứu công chúa, dùng tiếng đàn nhân nghĩa dẹp loạn quân xâm lăng. Nhưng cược đời Thạc Sanh luôn bị tên Lý Thông làm cho điêu đứng. Cuối cùng chính nghĩa đã thắng. Tên Lý thông gian ác bị đền tội. Mời các bạn cùng đón xem và cảm nhận</li></ul>
+                <div style="text-align: left"><b>Tớ Là Mari </b> <span> 5,147,528 lượt xem</span>
+                    <br>
+                    <b style="color: chocolate">Doraemon VietSub</b>
+                <p>Bộ phim kể về câu chuyện Thạch Sanh chém Trăn Tinh cứu dân, bắn Đại Bàng cứu công chúa, dùng tiếng đàn nhân nghĩa dẹp loạn quân xâm lăng. Nhưng cuộc đời Thạch Sanh luôn bị tên Lý Thông làm cho điêu đứng. Cuối cùng chính nghĩa đã thắng. Tên Lý thông gian ác bị đền tội. Mời các bạn cùng đón xem và cảm nhận</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div > Create by Tui</div>
     </div>
 </div>
 </body>
