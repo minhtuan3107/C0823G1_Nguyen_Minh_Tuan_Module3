@@ -5,6 +5,8 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<form method="post"></form>
+<form action="/customer-servlet" method="get">
+    <input type="submit" value="Bấm vào đây để hiển thị">
+</form>
 </body>
 </html>
