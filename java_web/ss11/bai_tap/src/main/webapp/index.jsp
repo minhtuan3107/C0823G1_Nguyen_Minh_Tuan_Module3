@@ -33,7 +33,8 @@
             <td>${product.manufacture}</td>
             <td><a href="/product-servlet?action=edit&id=${product.id}">Sửa sản phẩm</a>
             </td>
-            <td><a onclick="showMessage(${product.id})">Xóa sản phẩm</a>
+            <td>
+                <button onclick="showMessage(${product.id})">Xóa sản phẩm</button>
             </td>
         </tr>
     </c:forEach>
@@ -48,7 +49,7 @@
 </body>
 <script>
     function showMessage(id) {
-        let option = confirm('Are you sure to delete ?');
+        let option = confirm('Bạn có muốn xóa không ?');
         if (option === true) {
             window.location.href = "/product-servlet?action=delete&id=" + id;
         }
