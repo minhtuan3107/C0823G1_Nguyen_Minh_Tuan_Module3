@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ProductServlet", value = "/product-servlet")
@@ -33,7 +32,7 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "delete":
                 deleteProduct(request, response);
-                    break;
+                break;
             case "search":
                 showFormSearch(request, response);
                 break;
@@ -94,11 +93,7 @@ public class ProductServlet extends HttpServlet {
     protected void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         productService.remove(id);
-        try {
-            response.sendRedirect("/product-servlet");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        response.sendRedirect("/product-servlet");
     }
 
     protected void editProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -107,17 +102,10 @@ public class ProductServlet extends HttpServlet {
         int priceEdit = Integer.parseInt(request.getParameter("price"));
         String desEdit = request.getParameter("des");
         String manufactureEdit = request.getParameter("manufacture");
-        List<Product> productList = productService.getList();
         Product productEdit = new Product(nameEdit, priceEdit, desEdit, manufactureEdit);
-        for (Product product : productList) {
-            if (product.getId() == id) {
-                productService.edit(id, productEdit);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
-                request.setAttribute("productList", productList);
-                requestDispatcher.forward(request, response);
-                break;
-            }
-        }
+
+        productService.edit(id, productEdit);
+        response.sendRedirect("/product-servlet");
     }
 
 
@@ -136,14 +124,8 @@ public class ProductServlet extends HttpServlet {
     }
 
     protected void searchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Product> productList1 = productService.getList();
-        List<Product> productList = new ArrayList<>();
         String name = request.getParameter("name");
-        for (Product product : productList1) {
-            if (product.getName().contains(name)) {
-                productList.add(product);
-            }
-        }
+        List<Product> productList = productService.search(name);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
         request.setAttribute("productList", productList);
         requestDispatcher.forward(request, response);
@@ -157,10 +139,6 @@ public class ProductServlet extends HttpServlet {
         String manufacture = request.getParameter("manufacture");
         Product product = new Product(id, name, price, des, manufacture);
         productService.add(product);
-        try {
-            response.sendRedirect("/product-servlet");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        response.sendRedirect("/product-servlet");
     }
 }

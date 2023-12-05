@@ -4,10 +4,18 @@
 <html>
 <head>
     <title>JSP - Hello World</title>
-   </head>
+</head>
 <body>
 <a href="/product-servlet?action=add">Thêm mới sản phẩm</a>
-<a href="/product-servlet?action=search">Tìm kiếm sản phẩm</a>
+<form method="post" action="/product-servlet?action=search">
+    <table style="width: 100%;">
+        <tr>
+            <td>Enter name search:</td>
+            <td><input type="text" name="name" id="name" required></td>
+            <td><input type="submit" value="Search"></td>
+        </tr>
+    </table>
+</form>
 <table style="width: 100%">
     <tr>
         <td>Stt</td>

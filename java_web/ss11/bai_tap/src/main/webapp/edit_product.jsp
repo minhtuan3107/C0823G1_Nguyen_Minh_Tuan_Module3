@@ -12,30 +12,32 @@
 </head>
 <body>
 <form action="/product-servlet?action=edit" method="post">
-  <table>
-    <tr>
-      <td>ID Edit: ${product.id}</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Enter name edit:</td>
-      <td><input type="text"  name="name" value="${product.name}"></td>
-    </tr>
-    <tr>
-      <td>Enter price edit:</td>
-      <td><input type="number" name="price" value="${product.price}"></td>
-    </tr> <tr>
-    <td>Enter des edit:</td>
-    <td><input type="text" name="des" value="${product.des}"></td>
-  </tr>
-    <tr>
-      <td>Enter manufacture edit:</td>
-      <td><input type="text" name="manufacture" value="${product.manufacture}"></td>
-    </tr>
-    <tr>
-      <td><input type="submit" value="submit"></td>
-    </tr>
-  </table>
+    <input type="hidden" name="id" value="${product.id}">
+    <table>
+        <tr>
+            <td>ID Edit: ${product.id}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Enter name edit:</td>
+            <td><input type="text" name="name" value="${product.name}"></td>
+        </tr>
+        <tr>
+            <td>Enter price edit:</td>
+            <td><input type="number" name="price" value="${product.price}"></td>
+        </tr>
+        <tr>
+            <td>Enter des edit:</td>
+            <td><input type="text" name="des" value="${product.des}"></td>
+        </tr>
+        <tr>
+            <td>Enter manufacture edit:</td>
+            <td><input type="text" name="manufacture" value="${product.manufacture}"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="submit"></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>

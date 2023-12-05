@@ -14,4 +14,5 @@ public interface IProductRepository {
     void edit(int id, Product product);
 
     List<Product> search(String name);
+
 }
