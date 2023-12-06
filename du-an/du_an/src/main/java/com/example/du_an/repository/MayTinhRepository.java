@@ -1,7 +1,6 @@
 package com.example.du_an.repository;
 
 import com.example.du_an.model.MayTinh;
-import com.example.du_an.model.TinhTrang;
 import com.example.du_an.repository.impl.IMayTinhRepository;
 
 import java.sql.Connection;
@@ -28,9 +27,8 @@ public class MayTinhRepository implements IMayTinhRepository {
                 String ramMayTinh = resultSet.getString("ram");
                 String chip = resultSet.getString("chip");
                 String hang = resultSet.getString("hang");
-                String tenTinhTrang = resultSet.getString("ten_tinh_trang");
                 Boolean isDelete = resultSet.getBoolean("is_delete");
-                mayTinhList.add(new MayTinh(idMayTinh, tenMayTinh, ramMayTinh, chip, hang, new TinhTrang(tenTinhTrang), isDelete));
+                mayTinhList.add(new MayTinh(idMayTinh, tenMayTinh, ramMayTinh, chip, hang, isDelete));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -10,7 +10,7 @@ public class UserRepository implements IUserRepository {
     private final String SELECT = "select * from user;";
     private final String INSERT = "insert into user(name, email, country) values(?,?,?);";
     private final String DELETE = "delete from user where user.id = ?; ";
-    private final String UPDATE = "set name = ?, email = ?,country = ? where id = ?;";
+    private final String UPDATE = "update user set name = ? , email = ?, country = ? where id = ?;";
     private final String SORT_NAME = "select * from user order by name";
 
     @Override

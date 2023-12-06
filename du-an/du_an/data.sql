@@ -107,6 +107,6 @@ INSERT INTO su_dung_chi_tiet (id_dich_vu_di_kem, id_bang_su_dung, so_luong) VALU
     (2, 2, 1),
     (3, 3, 3);
     
-select * 
-from may_tinh 
-where may_tinh.is_delete = 0;
+select mt.ma_may_tinh, mt.ten_may_tinh,mt.ram, mt.chip,mt.hang,ttct.mo_ta_tinh_trang,mt.is_delete
+from may_tinh mt
+join tinh_trang_chi_tiet ttct on mt.ma_tinh_trang = ttct.ma_tinh_trang;

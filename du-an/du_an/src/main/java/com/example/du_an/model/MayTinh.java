@@ -95,4 +95,5 @@ public class MayTinh {
     public void setDelete(boolean delete) {
         isDelete = delete;
     }
+
 }

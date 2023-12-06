@@ -37,9 +37,14 @@ public class MayTinhServlet extends HttpServlet {
     }
 
     protected void showListMayTinh(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("lis1");
         List<MayTinh> mayTinhList = mayTinhService.getListMayTinh();
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
         request.setAttribute("mayTinhList", mayTinhList);
+        for (MayTinh mayTinh :  mayTinhList){
+            System.out.println(mayTinh);
+        }
         requestDispatcher.forward(request, response);
     }
 }
