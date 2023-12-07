@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.LoaiDichVu;
+import com.example.demo.repository.impl.ILoaiDichVuRepository;
 
 import java.sql.*;
 import java.util.ArrayList;

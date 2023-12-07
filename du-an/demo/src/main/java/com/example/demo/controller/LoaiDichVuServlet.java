@@ -24,7 +24,8 @@ public class LoaiDichVuServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "create":
+            case "delete":
+                xoaLoaiDichVu(request, response);
                 break;
             default:
                 hienThiLoaiDichVu(request, response);
@@ -54,8 +55,16 @@ public class LoaiDichVuServlet extends HttpServlet {
             case "edit":
                 suaLoaiDichVu(request, response);
                 break;
-            default:
+            case "add":
+                themLoaiDichVu(request, response);
+                break;
         }
+    }
+
+    protected void themLoaiDichVu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        loaiDichVuService.themLoaiDichVu(new LoaiDichVu(name));
+        response.sendRedirect("/loai-dich-vu-servlet");
     }
 
     protected void suaLoaiDichVu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

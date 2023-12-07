@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.LoaiDichVu;
-import com.example.demo.repository.ILoaiDichVuRepository;
+import com.example.demo.repository.impl.ILoaiDichVuRepository;
 import com.example.demo.repository.LoaiDichVuRepository;
 
 import java.util.List;

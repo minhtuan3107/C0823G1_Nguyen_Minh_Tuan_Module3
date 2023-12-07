@@ -29,8 +29,10 @@
     <thead>
     <tr>
         <th scope="col">STT</th>
-        <th scope="col">Tên Dịch Vụ</th>
-        <th scope="col">Hành động</th>
+        <th scope="col">Tên Dịch Vụ Đi Kèm</th>
+        <th scope="col">Giá dịch vụ đi kèm</th>
+        <th scope="col">Tên dịch vụ</th>
+        <th></th>
         <th scope="col">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -49,9 +51,19 @@
                         <div class="modal-body">
                             <form action="/loai-dich-vu-servlet?action=add" method="post">
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Nhập tên loại dịch vụ</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                    <label class="form-label">Nhập tên dịch vụ đi kèm</label>
+                                    <input type="text" class="form-control"
                                            aria-describedby="emailHelp" name="name">
+                                    <label class="form-label">Nhập giá dịch vụ đi kèm</label>
+                                    <input type="number" class="form-control"
+                                           aria-describedby="emailHelp" name="price">
+                                    <br>
+                                    <select class="form-select" aria-label="Default select example" name="choice">
+                                        <option selected>Chọn loại dịch vụ</option>
+                                        <c:forEach items="${list}" var="list" varStatus="loop">
+                                            <option value="${list.tenLoaiDichVu}">${loop.count} : ${list.tenLoaiDichVu}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
@@ -66,10 +78,12 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${list}" var="loai" varStatus="loop">
+    <c:forEach items="${listdvdk}" var="dvdk" varStatus="loop">
         <tr>
             <td>${loop.count}</td>
-            <td>${loai.tenLoaiDichVu}</td>
+            <td>${dvdk.tenDichVuDiKem}</td>
+            <td>${dvdk.giaDichVuDiKem}</td>
+            <td>${dvdk.tenLoaiDichVu}</td>
             <td>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop1_${loop.index}">
