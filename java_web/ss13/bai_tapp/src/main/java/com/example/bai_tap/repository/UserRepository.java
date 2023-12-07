@@ -13,6 +13,8 @@ public class UserRepository implements IUserRepository {
     private final String UPDATE = "update user set name = ? , email = ?, country = ? where id = ?;";
     private final String SORT_NAME = "select * from user order by name";
 
+    private final String SELECT_SP = "call get_all_user();";
+
     @Override
     public List<User> getListUser() {
         List<User> userList = new ArrayList<>();
