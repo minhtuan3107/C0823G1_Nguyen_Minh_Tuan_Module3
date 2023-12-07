@@ -28,28 +28,69 @@ public class DichVuDiKemServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "delete":
+                xoaDichVuDiKem(request, response);
+                break;
             default:
                 hienThiDanhSachDichVuDiKem(request, response);
-                hienThiDanhSachLoaiDichVuDiKem(request, response);
         }
     }
 
+
     protected void hienThiDanhSachDichVuDiKem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<DichVuDiKem> listdvdk = dichVuDiKemService.hienThiDichVuDiKem();
+        List<LoaiDichVu> list = loaiDichVuService.layDanhSachLoaiDichVu();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dich_vu_di_kem.jsp");
+        request.setAttribute("list", list);
         request.setAttribute("listdvdk", listdvdk);
         requestDispatcher.forward(request, response);
     }
 
-    protected void hienThiDanhSachLoaiDichVuDiKem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<LoaiDichVu> list = loaiDichVuService.layDanhSachLoaiDichVu();
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/dich_vu_di_kem.jsp");
-        request.setAttribute("list", list);
-        requestDispatcher.forward(request, response);
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "add":
+                themDichVuDiKem(request, response);
+                break;
+            case "edit":
+                suaDichVuDiKem(request, response);
+                break;
+            case "delete":
+                xoaDichVuDiKem(request, response);
+                break;
+        }
+    }
 
+    protected void xoaDichVuDiKem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        dichVuDiKemService.xoaDichVuDiKem(id);
+        response.sendRedirect("/dich-vu-di-kem-servlet");
+    }
+
+    protected void suaDichVuDiKem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        double price = Double.parseDouble(request.getParameter("price"));
+        LoaiDichVu loaiDichVu = loaiDichVuService.layThongTinLDV(Integer.parseInt(request.getParameter("maldv")));
+        int number = loaiDichVu.getMaLoaiDichVu();
+        DichVuDiKem dichVuDiKem = new DichVuDiKem(id, name, price, number);
+        dichVuDiKemService.suaDichVuDikem(dichVuDiKem);
+        response.sendRedirect("/dich-vu-di-kem-servlet");
+    }
+
+    protected void themDichVuDiKem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        double price = Double.parseDouble(request.getParameter("price"));
+        int text = Integer.parseInt(request.getParameter("maldv"));
+        LoaiDichVu loaiDichVu = loaiDichVuService.layThongTinLDV(text);
+        int idLoaiDichVu = loaiDichVu.getMaLoaiDichVu();
+        DichVuDiKem dichVuDiKem = new DichVuDiKem(name, price, idLoaiDichVu);
+        dichVuDiKemService.themDichVuDiKem(dichVuDiKem);
+        response.sendRedirect("/dich-vu-di-kem-servlet");
     }
 }

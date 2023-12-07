@@ -31,12 +31,16 @@
         <th scope="col">STT</th>
         <th scope="col">Tên Dịch Vụ Đi Kèm</th>
         <th scope="col">Giá dịch vụ đi kèm</th>
-        <th scope="col">Tên dịch vụ</th>
-        <th></th>
+        <th scope="col">Loại dịch vụ</th>
+        <th scope="col">Sửa</th>
+        <th scope="col">Xóa</th>
+        <th><a class="btn btn-primary" href="/loai-dich-vu-servlet" role="button">Hiển thị loại dịch vụ</a>
+
+        </th>
         <th scope="col">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Thêm loại dịch vụ mới
+                Thêm dịch vụ đi kèm
             </button>
 
             <!-- Modal -->
@@ -49,23 +53,21 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="/loai-dich-vu-servlet?action=add" method="post">
+                            <form action="/dich-vu-di-kem-servlet?action=add" method="post">
                                 <div class="mb-3">
                                     <label class="form-label">Nhập tên dịch vụ đi kèm</label>
-                                    <input type="text" class="form-control"
-                                           aria-describedby="emailHelp" name="name">
+                                    <input type="text" class="form-control" name="name">
                                     <label class="form-label">Nhập giá dịch vụ đi kèm</label>
-                                    <input type="number" class="form-control"
-                                           aria-describedby="emailHelp" name="price">
+                                    <input type="number" class="form-control" name="price">
                                     <br>
-                                    <select class="form-select" aria-label="Default select example" name="choice">
+                                    <select class="form-select" aria-label="Default select example" name="maldv">
                                         <option selected>Chọn loại dịch vụ</option>
-                                        <c:forEach items="${list}" var="list" varStatus="loop">
-                                            <option value="${list.tenLoaiDichVu}">${loop.count} : ${list.tenLoaiDichVu}</option>
+                                        <c:forEach items="${list}" var="l" varStatus="loop">
+                                            <option value="${l.maLoaiDichVu}">${l.tenLoaiDichVu}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Thêm</button>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -100,12 +102,21 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
-                            <form action="/loai-dich-vu-servlet?action=edit&id=${loai.maLoaiDichVu}" method="post">
+                            <form action="/dich-vu-di-kem-servlet?action=edit&id=${dvdk.maDichVuDiKem}" method="post">
                                 <div class="modal-body">
                                     <div class="mb-3">
-                                        <input type="hidden" name="id" value="${loai.maLoaiDichVu}">
+                                        <input type="hidden" name="id" value="${dvdk.maDichVuDiKem}">
                                         <label class="form-label">Tên dịch vụ</label>
                                         <input type="text" class="form-control" name="name">
+                                        <label class="form-label">Giá dịch vụ</label>
+                                        <input type="number" class="form-control" name="price">
+                                        <br>
+                                        <select class="form-select" aria-label="Default select example" name="maldv">
+                                            <option selected>Chọn loại dịch vụ</option>
+                                            <c:forEach items="${list}" var="l" varStatus="loop">
+                                                <option value="${l.maLoaiDichVu}">${l.tenLoaiDichVu}</option>
+                                            </c:forEach>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -119,32 +130,7 @@
                 </div>
             </td>
             <td>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal_${loop.index}">
-                    Xóa
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal_${loop.index}" tabindex="-1"
-                     aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Bạn có muốn xóa dịch vụ có tên là ${loai.tenLoaiDichVu} không ?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn" data-bs-dismiss="modal">Không</button>
-                                <a type="submit" class="btn btn-primary" role="button"
-                                   href="/loai-dich-vu-servlet?action=delete&id=${loai.maLoaiDichVu}">Xóa</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               <button class="button" onclick=""></button>
             </td>
         </tr>
     </c:forEach>
@@ -158,5 +144,25 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    function checkConfirm(id,name){
+        return `<div class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>bạn có muốn xóa tên là : </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>`
+    }
+</script>
 </html>

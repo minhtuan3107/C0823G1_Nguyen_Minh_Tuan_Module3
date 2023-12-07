@@ -12,4 +12,6 @@ public interface ILoaiDichVuRepository {
     void suaLoaiDichVu(LoaiDichVu loaiDichVu);
 
     void xoaLoaiDichVu(int id);
+    LoaiDichVu layThongTinLDV(int id);
+
 }

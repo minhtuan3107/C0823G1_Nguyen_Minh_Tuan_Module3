@@ -13,5 +13,6 @@ public interface ILoaiDichVuService {
 
     void xoaLoaiDichVu(int id);
 
-    LoaiDichVu layThongTinLDV(int id);
+    LoaiDichVu findById(int id);
+
 }

@@ -3,85 +3,56 @@ package com.example.demo.repository;
 import com.example.demo.model.DichVuDiKem;
 import com.example.demo.model.LoaiDichVu;
 import com.example.demo.repository.impl.IDichVuDiKemRepository;
-import com.example.demo.service.ILoaiDichVuService;
-import com.example.demo.service.LoaiDichVuService;
+import com.example.demo.repository.impl.ILoaiDichVuRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DichVuDiKemRepository implements IDichVuDiKemRepository {
-    private final String HIEN_THI_DICH_VU_DI_KEM = "select * from dich_vu_di_kem left join loai_dich_vu on dich_vu_di_kem.id_loai_dich_vu = loai_dich_vu.id_loai_dich_vu;";
-    private final String XOA_DICH_VU_DI_KEM = "delete from dich_vu_di_kem where id_dich_vu_di_kem = ?;";
-    private final String SUA_DICH_VU_DI_KEM = "update dich_vu_di_kem set ten_dich_vu_di_kem = ?, gia_dich_vu_di_kem = ?, id_loai_dich_vu =  ? where id_dich_vu_di_kem = ?;";
-    private final String LAY_DANH_SACH_DICH_VU_DI_KEM = "SELECT * FROM computer.dich_vu_di_kem;";
-    private final String THEM_DICH_VU_DI_KEM = "INSERT INTO dich_vu_di_kem (ten_dich_vu_di_kem, gia_dich_vu_di_kem, id_loai_dich_vu) VALUES (?,?,?);";
-    private final ILoaiDichVuService loaiDichVuService = new LoaiDichVuService();
+    private final ILoaiDichVuRepository loaiDichVuRepository = new LoaiDichVuRepository();
+    private final String SELECT = "select * from dich_vu_di_kem;";
+    private final String INSERT = "INSERT INTO dich_vu_di_kem (ten_dich_vu_di_kem, gia_dich_vu_di_kem, id_loai_dich_vu) VALUES (?,?,?);";
+    private final String UPDATE = "update dich_vu_di_kem set ten_dich_vu_di_kem = ?, gia_dich_vu_di_kem = ?, id_loai_dich_vu = ?where id_dich_vu_di_kem = ?;";
+    private final String DELETE = "delete from dich_vu_di_kem where id_dich_vu_di_kem = ?;";
 
     @Override
     public List<DichVuDiKem> layDanhSachDichVuDiKem() {
-        List<DichVuDiKem> dvdk = new ArrayList<>();
+        List<DichVuDiKem> list = new ArrayList<>();
         Connection connection = BaseRepository.getConnection();
         Statement statement = null;
         try {
             statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(LAY_DANH_SACH_DICH_VU_DI_KEM);
+            ResultSet resultSet = statement.executeQuery(SELECT);
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_dich_vu_di_kem");
                 String name = resultSet.getString("ten_dich_vu_di_kem");
                 double price = resultSet.getDouble("gia_dich_vu_di_kem");
-                LoaiDichVu maLoaiDichVu = new LoaiDichVu(resultSet.getInt("id_loai_dich_vu"));
-                dvdk.add(new DichVuDiKem(id, name, price, maLoaiDichVu));
+                LoaiDichVu loaiDichVu = loaiDichVuRepository.findById(resultSet.getInt("id_loai_dich_vu"));
+                String nameLoaiDichVu = loaiDichVu.getTenLoaiDichVu();
+                list.add(new DichVuDiKem(id, name, price, loaiDichVu, nameLoaiDichVu));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                connection.close();
                 statement.close();
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        return dvdk;
-    }
-
-    @Override
-    public List<DichVuDiKem> hienThiDichVuDiKem() {
-        List<DichVuDiKem> dvdk = new ArrayList<>();
-        Connection connection = BaseRepository.getConnection();
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(HIEN_THI_DICH_VU_DI_KEM);
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id_dich_vu_di_kem");
-                String name = resultSet.getString("ten_dich_vu_di_kem");
-                double price = resultSet.getDouble("gia_dich_vu_di_kem");
-                String tenLoaiDichVu = resultSet.getString("ten_loai_dich_vu");
-                dvdk.add(new DichVuDiKem(id, name, price, tenLoaiDichVu));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                connection.close();
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return dvdk;
+        return list;
     }
 
     @Override
     public void themDichVuDiKem(DichVuDiKem dichVuDiKem) {
         Connection connection = BaseRepository.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(THEM_DICH_VU_DI_KEM);
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
             preparedStatement.setString(1, dichVuDiKem.getTenDichVuDiKem());
             preparedStatement.setDouble(2, dichVuDiKem.getGiaDichVuDiKem());
-            preparedStatement.setInt(3, dichVuDiKem.getIdLoaiDichVu());
+            preparedStatement.setInt(3, dichVuDiKem.getLoaiDichVu().getMaLoaiDichVu());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,12 +68,11 @@ public class DichVuDiKemRepository implements IDichVuDiKemRepository {
     @Override
     public void suaDichVuDikem(DichVuDiKem dichVuDiKem) {
         Connection connection = BaseRepository.getConnection();
-        System.out.println(dichVuDiKem.getIdLoaiDichVu());
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SUA_DICH_VU_DI_KEM);
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
             preparedStatement.setString(1, dichVuDiKem.getTenDichVuDiKem());
             preparedStatement.setDouble(2, dichVuDiKem.getGiaDichVuDiKem());
-            preparedStatement.setInt(3, dichVuDiKem.getIdLoaiDichVu());
+            preparedStatement.setInt(3, dichVuDiKem.getLoaiDichVu().getMaLoaiDichVu());
             preparedStatement.setInt(4, dichVuDiKem.getMaDichVuDiKem());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -120,7 +90,7 @@ public class DichVuDiKemRepository implements IDichVuDiKemRepository {
     public void xoaDichVuDiKem(int id) {
         Connection connection = BaseRepository.getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(XOA_DICH_VU_DI_KEM);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

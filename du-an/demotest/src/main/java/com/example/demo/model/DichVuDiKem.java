@@ -4,14 +4,17 @@ public class DichVuDiKem {
     private int maDichVuDiKem;
     private String tenDichVuDiKem;
     private double giaDichVuDiKem;
-    private LoaiDichVu maLoaiDichVu;
-    private int idLoaiDichVu;
+    private LoaiDichVu loaiDichVu;
     private String tenLoaiDichVu;
 
-    public DichVuDiKem(String tenDichVuDiKem, double giaDichVuDiKem, int idLoaiDichVu) {
+
+
+    public DichVuDiKem(int maDichVuDiKem, String tenDichVuDiKem, double giaDichVuDiKem, LoaiDichVu loaiDichVu, String tenLoaiDichVu) {
+        this.maDichVuDiKem = maDichVuDiKem;
         this.tenDichVuDiKem = tenDichVuDiKem;
         this.giaDichVuDiKem = giaDichVuDiKem;
-        this.idLoaiDichVu = idLoaiDichVu;
+        this.loaiDichVu = loaiDichVu;
+        this.tenLoaiDichVu = tenLoaiDichVu;
     }
 
     public DichVuDiKem(int maDichVuDiKem, String tenDichVuDiKem, double giaDichVuDiKem, String tenLoaiDichVu) {
@@ -21,34 +24,11 @@ public class DichVuDiKem {
         this.tenLoaiDichVu = tenLoaiDichVu;
     }
 
-    public DichVuDiKem(int maDichVuDiKem, String tenDichVuDiKem, double giaDichVuDiKem, int idLoaiDichVu) {
-        this.maDichVuDiKem = maDichVuDiKem;
-        this.tenDichVuDiKem = tenDichVuDiKem;
-        this.giaDichVuDiKem = giaDichVuDiKem;
-        this.idLoaiDichVu = idLoaiDichVu;
-    }
-
-    public int getIdLoaiDichVu() {
-        return idLoaiDichVu;
-    }
-
-    public void setIdLoaiDichVu(int idLoaiDichVu) {
-        this.idLoaiDichVu = idLoaiDichVu;
-    }
-
     public String getTenLoaiDichVu() {
         return tenLoaiDichVu;
     }
-
     public void setTenLoaiDichVu(String tenLoaiDichVu) {
         this.tenLoaiDichVu = tenLoaiDichVu;
-    }
-
-    public DichVuDiKem(int maDichVuDiKem, String tenDichVuDiKem, double giaDichVuDiKem, LoaiDichVu maLoaiDichVu) {
-        this.maDichVuDiKem = maDichVuDiKem;
-        this.tenDichVuDiKem = tenDichVuDiKem;
-        this.giaDichVuDiKem = giaDichVuDiKem;
-        this.maLoaiDichVu = maLoaiDichVu;
     }
 
     public DichVuDiKem(int maDichVuDiKem, String tenDichVuDiKem, double giaDichVuDiKem) {
@@ -57,6 +37,15 @@ public class DichVuDiKem {
         this.giaDichVuDiKem = giaDichVuDiKem;
     }
 
+
+    public DichVuDiKem(int maDichVuDiKem, String tenDichVuDiKem, double giaDichVuDiKem, LoaiDichVu loaiDichVu) {
+        this.maDichVuDiKem = maDichVuDiKem;
+        this.tenDichVuDiKem = tenDichVuDiKem;
+        this.giaDichVuDiKem = giaDichVuDiKem;
+        this.loaiDichVu = loaiDichVu;
+    }
+
+
     public DichVuDiKem() {
     }
 
@@ -64,10 +53,10 @@ public class DichVuDiKem {
         this.maDichVuDiKem = maDichVuDiKem;
     }
 
-    public DichVuDiKem(String tenDichVuDiKem, double giaDichVuDiKem, LoaiDichVu maLoaiDichVu) {
+    public DichVuDiKem(String tenDichVuDiKem, double giaDichVuDiKem, LoaiDichVu loaiDichVu) {
         this.tenDichVuDiKem = tenDichVuDiKem;
         this.giaDichVuDiKem = giaDichVuDiKem;
-        this.maLoaiDichVu = maLoaiDichVu;
+        this.loaiDichVu = loaiDichVu;
     }
 
     public DichVuDiKem(String tenDichVuDiKem, double giaDichVuDiKem) {
@@ -94,16 +83,15 @@ public class DichVuDiKem {
     public double getGiaDichVuDiKem() {
         return giaDichVuDiKem;
     }
-
     public void setGiaDichVuDiKem(double giaDichVuDiKem) {
         this.giaDichVuDiKem = giaDichVuDiKem;
     }
 
-    public LoaiDichVu getMaLoaiDichVu() {
-        return maLoaiDichVu;
+    public LoaiDichVu getLoaiDichVu() {
+        return loaiDichVu;
     }
 
-    public void setMaLoaiDichVu(LoaiDichVu maLoaiDichVu) {
-        this.maLoaiDichVu = maLoaiDichVu;
+    public void setLoaiDichVu(LoaiDichVu loaiDichVu) {
+        this.loaiDichVu = loaiDichVu;
     }
 }

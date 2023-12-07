@@ -1,10 +1,10 @@
-package com.example.demo.service;
+package com.example.demo.repository.impl;
 
 import com.example.demo.model.LoaiDichVu;
 
 import java.util.List;
 
-public interface ILoaiDichVuService {
+public interface ILoaiDichVuRepository {
     List<LoaiDichVu> layDanhSachLoaiDichVu();
 
     void themLoaiDichVu(LoaiDichVu loaiDichVu);
@@ -13,5 +13,5 @@ public interface ILoaiDichVuService {
 
     void xoaLoaiDichVu(int id);
 
-    LoaiDichVu layThongTinLDV(int id);
+    LoaiDichVu findById(int id);
 }

@@ -40,12 +40,10 @@ public class LoaiDichVuServlet extends HttpServlet {
 
     protected void hienThiLoaiDichVu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<LoaiDichVu> list = loaiDichVuService.layDanhSachLoaiDichVu();
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/loai_dich_vu.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
         request.setAttribute("list", list);
         requestDispatcher.forward(request, response);
     }
-
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

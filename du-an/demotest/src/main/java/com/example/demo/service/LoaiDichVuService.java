@@ -30,7 +30,7 @@ public class LoaiDichVuService implements ILoaiDichVuService {
     }
 
     @Override
-    public LoaiDichVu layThongTinLDV(int id) {
-        return loaiDichVuRepository.layThongTinLDV(id);
+    public LoaiDichVu findById(int id) {
+        return loaiDichVuRepository.findById(id);
     }
 }

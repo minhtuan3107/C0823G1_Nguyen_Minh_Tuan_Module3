@@ -13,6 +13,8 @@ public class LoaiDichVuRepository implements ILoaiDichVuRepository {
     private final String SUA_LOAI_DICH_VU = "update loai_dich_vu set loai_dich_vu.ten_loai_dich_vu = ? where loai_dich_vu.id_loai_dich_vu = ?;";
     private final String XOA_LOAI_DICH_VU = "delete from loai_dich_vu where loai_dich_vu.id_loai_dich_vu = ?";
 
+    private final String TIM_LOAI_DICH_VU = "select * from loai_dich_vu where loai_dich_vu.id_loai_dich_vu = ?;";
+
     @Override
     public List<LoaiDichVu> layDanhSachLoaiDichVu() {
         List<LoaiDichVu> list = new ArrayList<>();
@@ -89,10 +91,10 @@ public class LoaiDichVuRepository implements ILoaiDichVuRepository {
     }
 
     @Override
-    public LoaiDichVu layThongTinLDV(int id) {
+    public LoaiDichVu findById(int id) {
         List<LoaiDichVu> list = layDanhSachLoaiDichVu();
-        for (LoaiDichVu loaiDichVu : list) {
-            if (loaiDichVu.getMaLoaiDichVu() == id) {
+        for (LoaiDichVu loaiDichVu : list){
+            if(loaiDichVu.getMaLoaiDichVu() == id){
                 return loaiDichVu;
             }
         }
