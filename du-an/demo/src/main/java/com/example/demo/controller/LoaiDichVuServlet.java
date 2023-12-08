@@ -24,12 +24,20 @@ public class LoaiDichVuServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "delete":
-                xoaLoaiDichVu(request, response);
+            case "edit":
+                hienThiFormSua(request, response);
                 break;
             default:
                 hienThiLoaiDichVu(request, response);
         }
+    }
+
+    protected void hienThiFormSua(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        LoaiDichVu loaiDichVu = loaiDichVuService.layThongTinLDV(id);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/sua_loai_dich_vu.jsp");
+        request.setAttribute("loaiDichVu", loaiDichVu);
+        requestDispatcher.forward(request, response);
     }
 
     protected void xoaLoaiDichVu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,7 +54,6 @@ public class LoaiDichVuServlet extends HttpServlet {
     }
 
 
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -54,6 +61,9 @@ public class LoaiDichVuServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "delete":
+                xoaLoaiDichVu(request, response);
+                break;
             case "edit":
                 suaLoaiDichVu(request, response);
                 break;

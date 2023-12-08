@@ -28,14 +28,45 @@ public class DichVuDiKemServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "delete":
-                xoaDichVuDiKem(request, response);
+            case "edit":
+                hienThiFormEdit(request, response);
                 break;
             default:
                 hienThiDanhSachDichVuDiKem(request, response);
         }
     }
 
+    protected void hienThiFormXoa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        DichVuDiKem dichVuDiKem = null;
+        List<DichVuDiKem> listdvdk = dichVuDiKemService.layDanhSachDichVuDiKem();
+        for (DichVuDiKem dichVuDiKem1 : listdvdk) {
+            if (dichVuDiKem1.getMaDichVuDiKem() == id) {
+                dichVuDiKem = dichVuDiKem1;
+                break;
+            }
+        }
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/xoa_dich_vu_di_kem.jsp");
+        request.setAttribute("dichVuDiKem", dichVuDiKem);
+        requestDispatcher.forward(request, response);
+    }
+
+    protected void hienThiFormEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        DichVuDiKem dichVuDiKem = null;
+        List<DichVuDiKem> listdvdk = dichVuDiKemService.layDanhSachDichVuDiKem();
+        for (DichVuDiKem dichVuDiKem1 : listdvdk) {
+            if (dichVuDiKem1.getMaDichVuDiKem() == id) {
+                dichVuDiKem = dichVuDiKem1;
+                break;
+            }
+        }
+        List<LoaiDichVu> list = loaiDichVuService.layDanhSachLoaiDichVu();
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/sua_dich_vu_di_kem.jsp");
+        request.setAttribute("list", list);
+        request.setAttribute("dichVuDiKem", dichVuDiKem);
+        requestDispatcher.forward(request, response);
+    }
 
     protected void hienThiDanhSachDichVuDiKem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<DichVuDiKem> listdvdk = dichVuDiKemService.hienThiDichVuDiKem();

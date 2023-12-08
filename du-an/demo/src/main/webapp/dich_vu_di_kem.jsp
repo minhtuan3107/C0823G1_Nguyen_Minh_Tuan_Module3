@@ -87,82 +87,54 @@
             <td>${dvdk.giaDichVuDiKem}</td>
             <td>${dvdk.tenLoaiDichVu}</td>
             <td>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop1_${loop.index}">
-                    Sửa dịch vụ
-                </button>
-                <div class="modal fade" id="staticBackdrop1_${loop.index}" data-bs-backdrop="static"
-                     data-bs-keyboard="false"
-                     tabindex="-1"
-                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel1">Sửa dịch vụ</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <form action="/dich-vu-di-kem-servlet?action=edit&id=${dvdk.maDichVuDiKem}" method="post">
-                                <div class="modal-body">
-                                    <div class="mb-3">
-                                        <input type="hidden" name="id" value="${dvdk.maDichVuDiKem}">
-                                        <label class="form-label">Tên dịch vụ</label>
-                                        <input type="text" class="form-control" name="name">
-                                        <label class="form-label">Giá dịch vụ</label>
-                                        <input type="number" class="form-control" name="price">
-                                        <br>
-                                        <select class="form-select" aria-label="Default select example" name="maldv">
-                                            <option selected>Chọn loại dịch vụ</option>
-                                            <c:forEach items="${list}" var="l" varStatus="loop">
-                                                <option value="${l.maLoaiDichVu}">${l.tenLoaiDichVu}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">Sửa</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <a class="button btn-danger"
+                   href="/dich-vu-di-kem-servlet?action=edit&id=${dvdk.maDichVuDiKem}">Sửa</a>
             </td>
             <td>
-               <button class="button" onclick=""></button>
+                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal1"
+                        onclick="send('${dvdk.maDichVuDiKem}','${dvdk.tenDichVuDiKem}')"> Xóa
+                </button>
             </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/dich-vu-di-kem-servlet?action=delete" method="post">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #ffc107; color:#000; font-size: 1.2rem">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Xác nhận xóa</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <input type="hidden" name="id" id="id">
+                <div class="modal-body">
+                    Bạn có muốn xóa "<span style="color:#ffc107 " id="title"></span>" hay không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+                    <button type="submit" class="btn btn-warning">Xóa</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <footer id="sticky-footer" class="flex-shrink-0 py-3 bg-dark text-white-50 fs-3 mt-4 fixed-bottom">
     <div class="container text-center">
         <small>Copyright &copy; Net Cỏ</small>
     </div>
 </footer>
 </body>
+<script>
+    function send(id, title) {
+        document.getElementById("id").value = id;
+        document.getElementById("title").innerText = title;
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous">
-    function checkConfirm(id,name){
-        return `<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>bạn có muốn xóa tên là : </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>`
-    }
 </script>
+
 </html>
