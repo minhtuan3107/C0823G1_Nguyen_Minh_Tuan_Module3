@@ -24,20 +24,13 @@
         </a>
     </div>
 </nav>
-
-<table class="table">
-    <thead>
+<h1 style="text-align: center">Danh sách loại dịch vụ đi kèm</h1>
+<table class="table" style="width: 100%;">
     <tr>
-        <th scope="col">STT</th>
-        <th scope="col">Tên Dịch Vụ Đi Kèm</th>
-        <th scope="col">Giá dịch vụ đi kèm</th>
-        <th scope="col">Loại dịch vụ</th>
-        <th scope="col">Sửa</th>
-        <th scope="col">Xóa</th>
-        <th><a class="btn btn-primary" href="/loai-dich-vu-servlet" role="button">Hiển thị loại dịch vụ</a>
-
-        </th>
-        <th scope="col">
+        <td><a class="btn btn-success" href="/loai-dich-vu-servlet" role="button">Hiển thị loại dịch vụ</a>
+        </td>
+        <td>
+        <td scope="col">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Thêm dịch vụ đi kèm
@@ -76,7 +69,18 @@
                     </div>
                 </div>
             </div>
-        </th>
+        </td>
+    </tr>
+</table>
+<table class="table" style="width: 100%;">
+    <thead>
+    <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Tên Dịch Vụ Đi Kèm</th>
+        <th scope="col">Giá dịch vụ đi kèm</th>
+        <th scope="col">Loại dịch vụ</th>
+        <th scope="col">Sửa</th>
+        <th scope="col">Xóa</th>
     </tr>
     </thead>
     <tbody>
@@ -87,11 +91,11 @@
             <td>${dvdk.giaDichVuDiKem}</td>
             <td>${dvdk.tenLoaiDichVu}</td>
             <td>
-                <a class="button btn-danger"
+                <a class="btn btn-primary" role="button"
                    href="/dich-vu-di-kem-servlet?action=edit&id=${dvdk.maDichVuDiKem}">Sửa</a>
             </td>
             <td>
-                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#exampleModal1"
                         onclick="send('${dvdk.maDichVuDiKem}','${dvdk.tenDichVuDiKem}')"> Xóa
                 </button>

@@ -8,6 +8,22 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
+<nav style="padding: 0;" class="navbar navbar-expand-sm navbar-light bg-body-tertiary">
+    <!-- Container wrapper -->
+    <div class="container-fluid bg-dark">
+        <!-- Navbar brand -->
+        <a class="navbar-brand me-2" target="_blank" href="https://www.facebook.com/dolevan1011">
+            <img
+                    src="./img/logo.jpg"
+                    height="60"
+                    width="160"
+                    alt="MDB Logo"
+                    loading="lazy"
+                    style="margin-top: -1px;"
+            />
+        </a>
+    </div>
+</nav>
 <div style="border-style: inset;">
     <h1>Sửa</h1>
     <form action="/dich-vu-di-kem-servlet?action=edit" method="post">
@@ -30,6 +46,11 @@
         <br>
         <button type="submit" class="btn btn-primary">Xác nhận sửa</button>
     </form>
+    <footer id="sticky-footer" class="flex-shrink-0 py-3 bg-dark text-white-50 fs-3 mt-4 fixed-bottom">
+        <div class="container text-center">
+            <small>Copyright &copy; Net Cỏ</small>
+        </div>
+    </footer>
 </div>
 
 </body>

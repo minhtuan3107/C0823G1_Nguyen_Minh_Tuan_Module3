@@ -16,7 +16,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public List<User> getListUser() {
         List<User> userList = new ArrayList<>();
-        Connection connection = BaseRepository.getConnection();
+        Connection connection = com.example.duan.repository.BaseRepository.getConnection();
         Statement statement = null;
         try {
             statement = connection.createStatement();
@@ -47,7 +47,7 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public void addUser(User user) {
-        Connection connection = BaseRepository.getConnection();
+        Connection connection = com.example.duan.repository.BaseRepository.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
             preparedStatement.setString(1, user.getName());
@@ -61,7 +61,7 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public void editUser(User user) {
-        Connection connection = BaseRepository.getConnection();
+        Connection connection = com.example.duan.repository.BaseRepository.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
             preparedStatement.setString(1, user.getName());
@@ -82,7 +82,7 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public void deleteUser(int id) {
-        Connection connection = BaseRepository.getConnection();
+        Connection connection = com.example.duan.repository.BaseRepository.getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
             preparedStatement.setInt(1, id);
@@ -124,7 +124,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public List<User> sortByName() {
         List<User> userList = new ArrayList<>();
-        Connection connection = BaseRepository.getConnection();
+        Connection connection = com.example.duan.repository.BaseRepository.getConnection();
         Statement statement = null;
         try {
             statement = connection.createStatement();

@@ -24,19 +24,16 @@
         </a>
     </div>
 </nav>
-
-<table class="table">
-    <thead>
+<h1 style="text-align: center">Danh sách loại dịch vụ</h1>
+<table class="tabble" style="width: 100%">
     <tr>
-        <th scope="col">STT</th>
-        <th scope="col">Tên Dịch Vụ</th>
-        <th scope="col">Hành động</th>
+        <td><a class="btn btn-success" href="/dich-vu-di-kem-servlet" role="button">Hiển thị dịch vụ đi kèm</a>
+        </td>
         <th scope="col">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Thêm loại dịch vụ mới
             </button>
-
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel2"
                  aria-hidden="true">
@@ -64,6 +61,15 @@
             </div>
         </th>
     </tr>
+</table>
+<table class="table" style="width: 100%;">
+    <thead>
+    <tr>
+        <th scope="col">STT</th>
+        <th scope="col">Tên Dịch Vụ</th>
+        <th scope="col">Sửa</th>
+        <th scope="col">Xóa</th>
+    </tr>
     </thead>
     <tbody>
     <c:forEach items="${list}" var="loai" varStatus="loop">
@@ -71,11 +77,11 @@
             <td>${loop.count}</td>
             <td>${loai.tenLoaiDichVu}</td>
             <td>
-                <a class="button btn-danger"
+                <a class="btn btn-primary" role="button"
                    href="/loai-dich-vu-servlet?action=edit&id=${loai.maLoaiDichVu}">Sửa</a>
             </td>
             <td>
-                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                         data-bs-target="#exampleModal1"
                         onclick="send('${loai.maLoaiDichVu}','${loai.tenLoaiDichVu}')"> Xóa
                 </button>

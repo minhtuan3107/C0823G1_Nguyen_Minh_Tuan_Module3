@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.DichVuDiKem;
 import com.example.demo.model.LoaiDichVu;
-import com.example.demo.service.ILoaiDichVuService;
-import com.example.demo.service.LoaiDichVuService;
+import com.example.demo.service.dichvudikemservice.DichVuDiKemService;
+import com.example.demo.service.dichvudikemservice.IDichVuDiKemService;
+import com.example.demo.service.loaidichvuservice.ILoaiDichVuService;
+import com.example.demo.service.loaidichvuservice.LoaiDichVuService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +19,7 @@ import java.util.List;
 @WebServlet(name = "LoaiDichVuServlet", value = "/loai-dich-vu-servlet")
 public class LoaiDichVuServlet extends HttpServlet {
     private final ILoaiDichVuService loaiDichVuService = new LoaiDichVuService();
+    private final IDichVuDiKemService dichVuDiKemService = new DichVuDiKemService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,8 +46,19 @@ public class LoaiDichVuServlet extends HttpServlet {
 
     protected void xoaLoaiDichVu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        loaiDichVuService.xoaLoaiDichVu(id);
-        response.sendRedirect("/loai-dich-vu-servlet");
+        List<DichVuDiKem> list = dichVuDiKemService.layDanhSachDichVuDiKem();
+        int count = 0;
+        for (DichVuDiKem dichVuDiKem : list) {
+            if (dichVuDiKem.getMaLoaiDichVu().getMaLoaiDichVu() == id) {
+                count++;
+            }
+        }
+        if (count != 0) {
+            response.sendRedirect("/loi_xoa_khong_thanh_cong.jsp");
+        } else {
+            loaiDichVuService.xoaLoaiDichVu(id);
+            response.sendRedirect("/loai-dich-vu-servlet");
+        }
     }
 
     protected void hienThiLoaiDichVu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
