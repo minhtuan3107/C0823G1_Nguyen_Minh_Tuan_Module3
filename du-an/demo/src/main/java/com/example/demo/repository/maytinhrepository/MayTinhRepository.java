@@ -274,7 +274,7 @@ public class MayTinhRepository implements IMayTinhRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 int id_bang_su_dung = resultSet.getInt("id_bang_su_dung");
-                double total_tien = 0;
+                double total_tien = 0.0;
                 Timestamp timestampStart = resultSet.getTimestamp("thoi_gian_bat_dau");
                 LocalDateTime thoi_gian_bat_dau = timestampStart.toLocalDateTime();
                 Timestamp timestampEnd = resultSet.getTimestamp("thoi_gian_ket_thuc");
@@ -296,8 +296,8 @@ public class MayTinhRepository implements IMayTinhRepository {
 
                 long seconds = duration.getSeconds();
 
-                total_tien = total_tien + (1000 / 3600 ) * seconds;
-
+                total_tien = total_tien * seconds;
+                total_tien += 1000 / 3600.0;
                 bangSuDung = new BangSuDung(id_bang_su_dung,thoi_gian_bat_dau,thoi_gian_ket_thuc,mayTinh,nhanVien,total_tien,seconds,status);
                 historyRental.add(bangSuDung);
             }
