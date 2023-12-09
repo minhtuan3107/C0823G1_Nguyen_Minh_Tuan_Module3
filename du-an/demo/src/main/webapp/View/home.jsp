@@ -22,18 +22,22 @@
     <script>
 
     </script>
+    <style>
+    </style>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/home-servlet">Quản lý quán net</a>
+        <a class="navbar-brand" href="#">Quản lý quán net</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/may-tinh-servlet">Home</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/dich-vu-di-kem-servlet">Quản lý dịch vụ đi kèm</a>
                 </li>
@@ -47,12 +51,48 @@
         </div>
     </div>
 </nav>
-<h1>Xóa không thành công vui lòng thử lại</h1>
+<!-- Navbar -->
+<h1 style="text-align: center">Quản lý phòng máy</h1>
+<table class="table table-light container-fluid table-hover">
+    <tr class="table-primary">
+        <th>Tên máy</th>
+        <th>Ram</th>
+        <th>Chip</th>
+        <th>Hãng</th>
+        <th>Lịch sử</th>
+    </tr>
+    <c:forEach items="${mayTinhList}" var="mayTinh">
+
+        <tr>
+            <td><a href="/may-tinh-servlet?action=detail&id=${mayTinh.idMayTinh}">${mayTinh.tenMayTinh}</a></td>
+            <td>${mayTinh.ramMayTinh}</td>
+            <td>${mayTinh.chip}</td>
+            <td>${mayTinh.hang}</td>
+            <td>
+                <a class="btn btn-success" href="history-rental-servlet?action=historyRental&id=${mayTinh.idMayTinh}">Lịch
+                    sử thuê </a>
+            </td>
+
+        </tr>
+    </c:forEach>
+</table>
+
+<br> <br> <br>
+
+<table class="table table-light container-fluid table-hover">
+
+</table>
+
+<!-- Footer -->
 <footer id="sticky-footer"
         class=" bg-body-tertiary flex-shrink-0 py-3 bg-dark text-white-50 fs-3 mt-4 fixed-bottom">
     <div class="container text-center">
         <small style="color: red; text-align: center">Copyright &copy; Net Cỏ</small>
     </div>
 </footer>
+<script>
+</script>
+
+<script src="../ss9/bootstrap-5.2.3-dist/js/bootstrap.bundle.js"></script>
 </body>
 </html>

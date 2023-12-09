@@ -1,67 +1,88 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: ASUS
+  Date: 12/5/2023
+  Time: 9:35 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <title>JSP - Hello World</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <script>
+
+    </script>
 </head>
 <body>
-<nav style="padding: 0;" class="navbar navbar-expand-sm navbar-light bg-body-tertiary">
-    <!-- Container wrapper -->
-    <div class="container-fluid bg-dark">
-        <!-- Navbar brand -->
-        <a class="navbar-brand me-2" target="_blank" href="https://www.facebook.com/dolevan1011">
-            <img
-                    src="./img/logo.jpg"
-                    height="60"
-                    width="160"
-                    alt="MDB Logo"
-                    loading="lazy"
-                    style="margin-top: -1px;"
-            />
-        </a>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/home-servlet">Quản lý quán net</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dich-vu-di-kem-servlet">Quản lý dịch vụ đi kèm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm loại dịch vụ</a>
+                    <!-- Button trigger modal -->
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel2"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel2">Thêm loại dịch vụ</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/loai-dich-vu-servlet?action=add" method="post">
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Nhập tên loại dịch
+                                                vụ</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                                   aria-describedby="emailHelp" name="name">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/loai-dich-vu-servlet">Quản lý loại dịch vụ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/home-servlet">Quản lý máy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/may-tinh-servlet">Hiển thị tổng số máy</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 <h1 style="text-align: center">Danh sách loại dịch vụ</h1>
-<table class="tabble" style="width: 100%">
-    <tr>
-        <td><a class="btn btn-success" href="/dich-vu-di-kem-servlet" role="button">Hiển thị dịch vụ đi kèm</a>
-        </td>
-        <th scope="col">
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Thêm loại dịch vụ mới
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel2"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel2">Thêm loại dịch vụ</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/loai-dich-vu-servlet?action=add" method="post">
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Nhập tên loại dịch vụ</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1"
-                                           aria-describedby="emailHelp" name="name">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </th>
-    </tr>
-</table>
 <table class="table" style="width: 100%;">
     <thead>
     <tr>
@@ -110,9 +131,10 @@
         </form>
     </div>
 </div>
-<footer id="sticky-footer" class="flex-shrink-0 py-3 bg-dark text-white-50 fs-3 mt-4 fixed-bottom">
+<footer id="sticky-footer"
+        class=" bg-body-tertiary flex-shrink-0 py-3 bg-dark text-white-50 fs-3 mt-4 fixed-bottom">
     <div class="container text-center">
-        <small>Copyright &copy; Net Cỏ</small>
+        <small style="color: red; text-align: center">Copyright &copy; Net Cỏ</small>
     </div>
 </footer>
 <script>
